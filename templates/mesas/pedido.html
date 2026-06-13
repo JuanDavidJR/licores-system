@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+    <h2>Mesa {{ mesa.numero }} - Pedido #{{ pedido.id }}</h2>
+    <a href="{% url 'mesas' %}" class="btn-secondary">Volver</a>
+</div>
+<div class="pedido-container">
+    <div class="pedido-form">
+        <h3>Agregar Producto</h3>
+        <form method="POST" action="{% url 'agregar_producto' pedido.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Producto</label>
+                <select name="producto_id">
+                    {% for producto in productos %}
+                    <option value="{{ producto.id }}">{{ producto.nombre }} - ${{ producto.precio }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Cantidad</label>
+                <input type="number" name="cantidad" value="1" min="1">
+            </div>
+            <button type="submit" class="btn">Agregar</button>
+        </form>
+    </div>
+    <div class="pedido-detalle">
+        <h3>Detalle del Pedido</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unit.</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in detalles %}
+                <tr>
+                    <td>{{ detalle.producto.nombre }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+                    <td>${{ detalle.precio_unitario }}</td>
+                    <td>${{ detalle.subtotal }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No hay productos en el pedido.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="total">
+            <strong>Total: ${{ pedido.total }}</strong>
+        </div>
+        <form method="POST" action="{% url 'cerrar_pedido' pedido.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-cerrar">Cerrar y Cobrar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

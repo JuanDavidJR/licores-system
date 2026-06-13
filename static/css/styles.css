@@ -1,0 +1,362 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background-color: #1a1a2e;
+    color: #fff;
+    padding: 1rem 2rem;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+/* MAIN */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #1a1a2e;
+    color: #aaa;
+    font-size: 0.85rem;
+    margin-top: 3rem;
+}
+
+/* PAGE HEADER */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+}
+
+.page-header h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #1a1a2e;
+}
+
+/* BOTONES */
+.btn {
+    background-color: #1a1a2e;
+    color: #fff;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #2e2e5e;
+}
+
+.btn-secondary {
+    background-color: #888;
+    color: #fff;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #666;
+}
+
+.btn-cerrar {
+    background-color: #c0392b;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.2s;
+}
+
+.btn-cerrar:hover {
+    background-color: #a93226;
+}
+
+.btn-eliminar {
+    background-color: #c0392b;
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s;
+}
+
+.btn-eliminar:hover {
+    background-color: #a93226;
+}
+
+/* MESAS */
+.mesas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.mesa-card {
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.mesa-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a2e;
+}
+
+.mesa-card .estado {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.mesa-card.libre {
+    border-left: 4px solid #27ae60;
+}
+
+.mesa-card.libre .estado {
+    color: #27ae60;
+}
+
+.mesa-card.ocupada {
+    border-left: 4px solid #c0392b;
+}
+
+.mesa-card.ocupada .estado {
+    color: #c0392b;
+}
+
+/* PEDIDO */
+.pedido-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+}
+
+.pedido-form {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.pedido-form h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    color: #1a1a2e;
+    font-weight: 500;
+}
+
+.pedido-detalle {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.pedido-detalle h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    color: #1a1a2e;
+    font-weight: 500;
+}
+
+.total {
+    text-align: right;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: #1a1a2e;
+    padding-top: 0.8rem;
+    border-top: 1px solid #ddd;
+}
+
+/* FORMULARIOS */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 0.3rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #1a1a2e;
+}
+
+/* TABLAS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+thead {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+th {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+td {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #f9f9f9;
+}
+
+.stock-bajo td {
+    color: #c0392b;
+}
+
+/* INVENTARIO */
+.inventario-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+}
+
+.inventario-form {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.inventario-form h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    color: #1a1a2e;
+    font-weight: 500;
+}
+
+.inventario-tabla h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    color: #1a1a2e;
+    font-weight: 500;
+}
+
+/* VENTAS */
+.ventas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ventas-resumen {
+    background-color: #1a1a2e;
+    color: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ventas-resumen h3 {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.total-dia {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+/* EMPTY */
+.empty {
+    color: #888;
+    font-size: 0.9rem;
+    padding: 1rem 0;
+}

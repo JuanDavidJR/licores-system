@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+    <h2>Inventario de Productos</h2>
+</div>
+<div class="inventario-container">
+    <div class="inventario-form">
+        <h3>Agregar Producto</h3>
+        <form method="POST" action="{% url 'agregar_producto_inventario' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label>Precio</label>
+                <input type="number" name="precio" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Stock</label>
+                <input type="number" name="stock" required>
+            </div>
+            <div class="form-group">
+                <label>Stock Minimo</label>
+                <input type="number" name="stock_minimo" required>
+            </div>
+            <button type="submit" class="btn">Agregar</button>
+        </form>
+    </div>
+    <div class="inventario-tabla">
+        <h3>Productos Registrados</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Stock Minimo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr {% if producto.stock_bajo %}class="stock-bajo"{% endif %}>
+                    <td>{{ producto.nombre }}</td>
+                    <td>${{ producto.precio }}</td>
+                    <td>{{ producto.stock }}</td>
+                    <td>{{ producto.stock_minimo }}</td>
+                    <td>{% if producto.stock_bajo %}Stock bajo{% else %}Normal{% endif %}</td>
+                    <td>
+                        <form method="POST" action="{% url 'eliminar_producto' producto.id %}" style="display:inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-eliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">No hay productos registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

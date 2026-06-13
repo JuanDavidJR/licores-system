@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+    <h2>Gestion de Mesas</h2>
+    <form method="POST" style="display:flex; gap:0.8rem; align-items:center;">
+        {% csrf_token %}
+        <input type="number" name="numero" placeholder="Numero de mesa" min="1" style="padding:0.5rem 0.8rem; border:1px solid #ccc; border-radius:4px; font-size:0.9rem; width:160px;">
+        <button type="submit" class="btn">Agregar Mesa</button>
+    </form>
+</div>
+<div class="mesas-grid">
+    {% for mesa in mesas %}
+    <div class="mesa-card {% if mesa.estado == 'ocupada' %}ocupada{% else %}libre{% endif %}">
+        <h3>Mesa {{ mesa.numero }}</h3>
+        <p class="estado">{{ mesa.estado|capfirst }}</p>
+        <a href="{% url 'abrir_mesa' mesa.id %}" class="btn">
+            {% if mesa.estado == 'libre' %}Abrir Mesa{% else %}Ver Pedido{% endif %}
+        </a>
+        {% if mesa.estado == 'libre' %}
+        <form method="POST" action="{% url 'eliminar_mesa' mesa.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-eliminar" style="margin-top:0.6rem; width:100%;">Eliminar</button>
+        </form>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p class="empty">No hay mesas registradas.</p>
+    {% endfor %}
+</div>
+{% endblock %}

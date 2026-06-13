@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+    <h2>Registro de Ventas</h2>
+</div>
+<div class="ventas-container">
+    <div class="ventas-resumen">
+        <h3>Total del dia</h3>
+        <p class="total-dia">${{ total_dia }}</p>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Venta #</th>
+                <th>Mesa</th>
+                <th>Fecha</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in ventas %}
+            <tr>
+                <td>{{ venta.id }}</td>
+                <td>Mesa {{ venta.pedido.mesa.numero }}</td>
+                <td>{{ venta.fecha|date:"d/m/Y H:i" }}</td>
+                <td>${{ venta.total }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay ventas registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

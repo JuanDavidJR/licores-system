@@ -1,0 +1,1 @@
+web: gunicorn licores_system.wsgi --chdir licores_system
