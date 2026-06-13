@@ -85,9 +85,10 @@ WSGI_APPLICATION = 'licores_system.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"postgresql://postgres:1234@localhost:5432/licores_db"
+        default="postgresql://postgres:1234@localhost:5432/licores_db"
     )
 }
 
