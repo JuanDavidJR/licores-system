@@ -24,7 +24,8 @@ def editar_producto(request, producto_id):
     if request.method == 'POST':
         producto.nombre = request.POST.get('nombre')
         producto.precio = request.POST.get('precio')
-        producto.stock = request.POST.get('stock')
+        stock = int(request.POST.get('stock', 0))
+        producto.stock = max(stock, 0)
         producto.stock_minimo = request.POST.get('stock_minimo')
         producto.save()
     return redirect('inventario')

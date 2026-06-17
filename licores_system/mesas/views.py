@@ -26,27 +26,32 @@ def abrir_mesa(request, mesa_id):
         'productos': productos,
         'detalles': detalles,
     })
-
 def agregar_producto(request, pedido_id):
     pedido = get_object_or_404(Pedido, id=pedido_id)
     if request.method == 'POST':
         producto_id = request.POST.get('producto_id')
         cantidad = int(request.POST.get('cantidad', 1))
         producto = get_object_or_404(Producto, id=producto_id)
-        detalle, creado = DetallePedido.objects.get_or_create(
-            pedido=pedido,
-            producto=producto,
-            defaults={'cantidad': cantidad, 'precio_unitario': producto.precio}
-        )
-        if not creado:
-            detalle.cantidad += cantidad
-            detalle.save()
-        producto.stock -= cantidad
-        producto.save()
-        total = sum(d.subtotal() for d in pedido.detalles.all())
-        pedido.total = total
-        pedido.save()
+
+        if cantidad > producto.stock:
+            cantidad = producto.stock
+
+        if cantidad > 0:
+            detalle, creado = DetallePedido.objects.get_or_create(
+                pedido=pedido,
+                producto=producto,
+                defaults={'cantidad': cantidad, 'precio_unitario': producto.precio}
+            )
+            if not creado:
+                detalle.cantidad += cantidad
+                detalle.save()
+            producto.stock -= cantidad
+            producto.save()
+            total = sum(d.subtotal() for d in pedido.detalles.all())
+            pedido.total = total
+            pedido.save()
     return redirect('abrir_mesa', mesa_id=pedido.mesa.id)
+
 
 def cerrar_pedido(request, pedido_id):
     pedido = get_object_or_404(Pedido, id=pedido_id)
