@@ -525,3 +525,41 @@ tr:hover td {
         padding: 0.5rem 1rem;
     }
 }
+
+
+.input-tabla {
+    background-color: #0f0f18;
+    border: 1px solid #2a2a4a;
+    color: #e0e0e0;
+    padding: 0.4rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+}
+
+.input-tabla:focus {
+    outline: none;
+    border-color: #c9a84c;
+}
+
+.input-pequeno {
+    width: 80px;
+}
+
+.btn-actualizar {
+    background-color: transparent;
+    color: #2ecc71;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid #2ecc71;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-actualizar:hover {
+    background-color: #2ecc71;
+    color: #1a1a2e;
+}

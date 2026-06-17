@@ -18,11 +18,11 @@
             </div>
             <div class="form-group">
                 <label>Stock</label>
-                <input type="number" name="stock" required>
+                <input type="number" name="stock" min="0" required>
             </div>
             <div class="form-group">
                 <label>Stock Minimo</label>
-                <input type="number" name="stock_minimo" required>
+                <input type="number" name="stock_minimo" min="0" required>
             </div>
             <button type="submit" class="btn">Agregar</button>
         </form>
@@ -43,13 +43,24 @@
             <tbody>
                 {% for producto in productos %}
                 <tr {% if producto.stock_bajo %}class="stock-bajo"{% endif %}>
-                    <td>{{ producto.nombre }}</td>
-                    <td>${{ producto.precio }}</td>
-                    <td>{{ producto.stock }}</td>
-                    <td>{{ producto.stock_minimo }}</td>
-                    <td>{% if producto.stock_bajo %}Stock bajo{% else %}Normal{% endif %}</td>
+                    <form method="POST" action="{% url 'editar_producto' producto.id %}" id="form-{{ producto.id }}">
+                        {% csrf_token %}
+                        <td><input type="text" name="nombre" value="{{ producto.nombre }}" form="form-{{ producto.id }}" class="input-tabla"></td>
+                        <td><input type="number" name="precio" value="{{ producto.precio }}" step="0.01" min="0" form="form-{{ producto.id }}" class="input-tabla input-pequeno"></td>
+                        <td><input type="number" name="stock" value="{{ producto.stock }}" min="0" form="form-{{ producto.id }}" class="input-tabla input-pequeno"></td>
+                        <td><input type="number" name="stock_minimo" value="{{ producto.stock_minimo }}" min="0" form="form-{{ producto.id }}" class="input-tabla input-pequeno"></td>
+                        <td>{% if producto.stock == 0 %}Sin stock{% elif producto.stock_bajo %}Stock bajo{% else %}Normal{% endif %}</td>
+                        <td>
+                            <div style="display:flex; gap:0.4rem;">
+                                <button type="submit" form="form-{{ producto.id }}" class="btn-actualizar">Actualizar</button>
+                            </div>
+                        </td>
+                    </form>
+                </tr>
+                <tr>
+                    <td colspan="5"></td>
                     <td>
-                        <form method="POST" action="{% url 'eliminar_producto' producto.id %}" style="display:inline">
+                        <form method="POST" action="{% url 'eliminar_producto' producto.id %}">
                             {% csrf_token %}
                             <button type="submit" class="btn-eliminar">Eliminar</button>
                         </form>
